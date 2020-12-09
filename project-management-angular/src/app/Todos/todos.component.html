@@ -1,0 +1,106 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4 col-xlg-3 col-md-12">
+            <div class="white-box">
+                <div class="alert alert-danger" *ngIf="_error != ''">{{_error}}</div>
+                <form #todoform="ngForm" (ngSubmit)="onsubmittodo(todoform)" class="form-horizontal form-material">
+                    <div class="form-group mb-4">
+                        <label class="col-md-12 p-0">Task Name</label>
+                        <div class="col-md-12 border-bottom p-0">
+                            <input type="text" ngModel name="title" placeholder="Johnathan Doe"
+                                class="form-control p-0 border-0"> </div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="col-sm-12">Assign To</label>
+                        <div class="col-sm-12 border-bottom">
+                            <select class="form-control p-0 border-0" ngModel name="assignedto">
+                                <option *ngFor="let member of members" value="{{member._id}}">{{member.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="col-sm-12">Priority</label>
+                        <div class="col-sm-12 border-bottom">
+                            <select class="form-control p-0 border-0" ngModel name="priorities">
+                                <option>Instant</option>
+                                <option>High</option>
+                                <option>Normal</option>
+                                <option>Low</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="col-sm-12">Stage</label>
+                        <div class="col-sm-12 border-bottom">
+                            <select class="form-control p-0 border-0" ngModel name="stage">
+                                <option>New</option>
+                                <option>Review</option>
+                                <option>In Progress</option>
+                                <option>Re-Open</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="col-md-12 p-0">Due Date</label>
+                        <div class="col-md-12 border-bottom p-0">
+                            <input type="date" id="duedate" ngModel name="completedat"
+                                class="form-control p-0 border-0"> </div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <div class="col-sm-12">
+                            <button [disabled]="!todoform.valid" class="btn btn-success">Create Todo</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Column -->
+        <!-- Column -->
+        <div class="col-lg-8 col-xlg-9 col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Title</th>
+                                <th scope="col">Stage</th>
+                                <th scope="col">Assigned To</th>
+                                <th scope="col">Priorities</th>
+                                <th scope="col">Due Date</th>
+                                <th scope="col">Done</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let t of todo">
+                            <!-- *ngIf="t.status === false" -->
+                            <tr *ngIf="t.status === false">
+                                <a routerLink="/{{t._id}}/comments">
+                                    <th scope="row">{{t.title}}</th>
+                                </a>
+                                <td>{{t.stage}}</td>
+                                <td>{{t.assignedto.name}}</td>
+                                <td>{{t.priorities}}</td>
+                                <td>{{t.completedat}}</td>
+                                <td><input type="checkbox" name="{{t._id}}" checked="true"
+                                        (change)="onChangeTodo(t._id,$event)">
+                                </td>
+                            </tr>
+                            <tr *ngIf="t.status === true">
+                                <a routerLink="/{{t._id}}/comments">
+                                    <th scope="row">{{t.title}}</th>
+                                </a>
+                                <td>{{t.stage}}</td>
+                                <td>{{t.assignedto.name}}</td>
+                                <td>{{t.priorities}}</td>
+                                <td>{{t.completedat}}</td>
+                                <td><input type="checkbox" name="{{t._id}}" (change)="onChangeTodo(t._id,$event)">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Column -->
+    </div>
+</div>

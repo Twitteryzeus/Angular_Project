@@ -1,0 +1,74 @@
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <!-- Row -->
+    <div class="row">
+        <!-- Column -->
+        <div class="col-lg-4 col-xlg-3 col-md-12">
+            <div class="white-box">
+                <div class="alert alert-danger" *ngIf="_error != ''">{{_error}}</div>
+                <form #project="ngForm" (ngSubmit)="onSaveProject(project)" class="form-horizontal form-material">
+                    <div class="form-group mb-4">
+                        <label class="col-md-12 p-0">Project Title</label>
+                        <div class="col-md-12 border-bottom p-0">
+                            <input type="text" ngModel name="title" placeholder="Johnathan Doe"
+                                class="form-control p-0 border-0"> </div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="example-email" class="col-md-12 p-0">Project Team</label>
+                        <div class="col-md-12 border-bottom p-0">
+                            <div class="checkbox" *ngFor="let member of members">
+                                <label><input type="checkbox" [name]="member._id" [ngModel]="member.isSelected"
+                                        (click)="member.toggleSelect()">&nbsp;{{member.name}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label class="col-md-12 p-0">Descriptions</label>
+                        <div class="col-md-12 border-bottom p-0">
+                            <textarea rows="5" ngModel name="description" class="form-control p-0 border-0"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <div class="col-sm-12">
+                            <button [disabled]="!project.valid" class="btn btn-success">Save Project</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Column -->
+        <!-- Column -->
+        <div class="col-lg-8 col-xlg-9 col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Title</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Created At</th>
+                                <th scope="col">Team</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let p of projects">
+                            <tr>
+                                <a routerLink="/{{p._id}}/todos">
+                                    <th scope="row">{{p.title}}</th>
+                                </a>
+                                <td>{{p.description}}</td>
+                                <td>{{p.createdAt}}</td>
+                                <td>
+                                    <span *ngFor="let member of p.team">
+                                        {{member.name}},
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <!-- Row -->
+    <div class="row">
+        <!-- Column -->
+        <div class="col-lg-4 col-xlg-3 col-md-12">
+            <div class="white-box">
+                <div class="alert alert-danger" *ngIf="_error != ''">{{_error}}</div>
+                <form #roles="ngForm" (ngSubmit)="onSaveRole(roles)" class="form-horizontal form-material">
+                    <div class="form-group mb-4">
+                        <label class="col-md-12 p-0">Role Name</label>
+                        <div class="col-md-12 border-bottom p-0">
+                            <input type="text" name="role" ngModel placeholder="Johnathan Doe"
+                                class="form-control p-0 border-0" autofocus="true"> </div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <div class="col-sm-12">
+                            <button [disabled]="!roles.valid" class="btn btn-success">Add Role</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Column -->
+        <!-- Column -->
+        <div class="col-lg-8 col-xlg-9 col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Role</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let r of _roles">
+                            <tr>
+                                <th scope="row">{{r.role}}</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Column -->
+    </div>
+</div>

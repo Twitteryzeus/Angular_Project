@@ -1,0 +1,14 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4 col-xlg-3 col-md-12">
+            <div class="white-box">
+                <p>Chat With: </p>
+                <div class="list-group container" *ngFor="let member of members">
+                    <a [routerLink]="['/',member._id,member.name,'memberchat']" 
+                     class="list-group-item list-group-item-action"
+                     *ngIf="memberid != member._id">{{member.name}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

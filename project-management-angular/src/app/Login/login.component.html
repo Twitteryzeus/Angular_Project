@@ -1,0 +1,47 @@
+<div class="container-fluid">
+    <div class="row">
+        <!-- Column -->
+        <div class="col-lg-8 col-xlg-9 col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h1>Login Here</h1><hr>
+                    <div class="alert alert-danger" *ngIf="_error != ''">{{_error}}</div>
+                    <form #login="ngForm" (ngSubmit)="doLogin(login)" class="form-horizontal form-material">
+
+                        <div class="form-group mb-4">
+                            <label for="email" class="col-md-12 p-0">Email</label>
+                            <div class="col-md-12 border-bottom p-0">
+                                
+                                <input ngModel #emailAddress="ngModel"  type="email" placeholder="johnathan@admin.com" class="form-control p-0 border-0"
+                                    name="email" id="email" required>
+                                </div>
+
+                                <span *ngIf="emailAddress.invalid && emailAddress.touched">  Please enter valid email </span>
+
+                        </div>
+                        
+                        <div class="form-group mb-4">
+                            <label class="col-md-12 p-0">Password</label>
+                            <div class="col-md-12 border-bottom p-0">
+                                <input ngModel #password="ngModel" type="password" required
+                                 name="password" class="form-control p-0 border-0" required>
+                                <span *ngIf="password.invalid && password.touched">Please enter valid password</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            
+                            <div class="col-sm-12">
+                                <button [disabled]="!login.valid" type="submit" class="btn btn-success">Login</button>
+                            </div>
+                        </div>
+                    </form>
+                    <button class="btn btn-primary col-sm-12"
+                     style="margin-left: 15px;"
+                     (click)="sendToRegister()">
+                    Register Here</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
